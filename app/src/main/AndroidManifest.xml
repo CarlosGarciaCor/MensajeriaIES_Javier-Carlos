@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Contactos"></activity>
+        <activity android:name=".Contactos" />
+        <activity android:name=".DetalleActivity"></activity>
     </application>
 
 </manifest>

@@ -8,4 +8,21 @@
 
     <string name="selecContacto">Selecciona el contacto:</string>
     <string name="tipoMsg">Enviar mediante:</string>
+
+    <!-- Fragment detalle tags -->
+    <string name="para">Para:</string>
+    <string name="de">De:</string>
+    <string name="asunto">Asunto:</string>
+    <string name="mensaje">Mensaje:</string>
+
+    <string name="seleccionarDestinatario">Seleccionar Destinatario</string>
+    <string name="seleccionarRemitente">Seleccionar Remitente</string>
+
+    <string name="deseaQueLeLlamen">Desea que le llamen</string>
+    <string name="volveraALlamar">Volverá a llamar</string>
+    <string name="paraSuInfo">Para su información</string>
+    <string name="urgente">¡URGENTE!</string>
+
+    <string name="enviar">Enviar</string>
+
 </resources>
