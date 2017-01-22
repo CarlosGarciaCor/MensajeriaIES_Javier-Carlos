@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO Como dejes esto así te pego un tiro Carlos
     public void diohmiowil (View v){
-        Intent sifunsionabien = new Intent(this, Contactos.class);
+        Intent sifunsionabien = new Intent(this, probatinasContactos.class);
         startActivity(sifunsionabien);
     }
 }
