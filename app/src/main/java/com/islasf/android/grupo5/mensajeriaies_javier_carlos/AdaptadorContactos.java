@@ -43,7 +43,7 @@ public class AdaptadorContactos extends ArrayAdapter<Contacto>{
         }
 
         holder.nombre.setText(contactos.get(position).getNombre());
-        holder.numero.setText(contactos.get(position).getNumero());
+        holder.numero.setText(contactos.get(position).getTelefono());
         holder.email.setText(contactos.get(position).getEmail());
 
         return item;
