@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MensajeriaIES_Javier-Carlos</string>
+    <string name="app_name">MensajeriaIF</string>
+
+    <string name="logoIF">Logo del IES Islas Filipinas</string>
+    <string name="newMsg">Nuevo mensaje</string>
+    <string name="historial">Historial</string>
+    <string name="about">Acerca de</string>
+
+    <string name="selecContacto">Selecciona el contacto:</string>
+    <string name="tipoMsg">Enviar mediante:</string>
 </resources>
