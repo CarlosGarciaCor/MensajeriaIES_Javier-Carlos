@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class probatinasContactos extends AppCompatActivity {
+public class ProbatinasContactos extends AppCompatActivity {
 
     ListView listadoContactos;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -19,7 +19,7 @@ public class probatinasContactos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_probationascontactos);
+        setContentView(R.layout.activity_probatinascontactos);
         listadoContactos = (ListView)findViewById(R.id.lvContactos);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {

@@ -1,7 +1,6 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements MenuListeners {
 
     //TODO Como dejes esto así te pego un tiro Carlos (y yo otro)
     public void diohmiowil (View v){
-        Intent sifunsionabien = new Intent(this, probatinasContactos.class);
+        Intent sifunsionabien = new Intent(this, ProbatinasContactos.class);
         startActivity(sifunsionabien);
     }
 
