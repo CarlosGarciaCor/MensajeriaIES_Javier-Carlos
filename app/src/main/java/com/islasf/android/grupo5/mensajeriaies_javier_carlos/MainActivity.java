@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements MenuListeners {
 
     //TODO Como dejes esto así te pego un tiro Carlos (y yo otro)
     public void diohmiowil (View v){
-        Intent sifunsionabien = new Intent(this, Contactos.class);
+        Intent sifunsionabien = new Intent(this, probatinasContactos.class);
         startActivity(sifunsionabien);
     }
 

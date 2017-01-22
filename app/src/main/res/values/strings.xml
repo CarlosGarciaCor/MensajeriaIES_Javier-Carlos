@@ -9,6 +9,12 @@
     <string name="selecContacto">Selecciona el contacto:</string>
     <string name="tipoMsg">Enviar mediante:</string>
 
+    <string name="empresa">Nombre de la empresa</string>
+    <string name="particular">Persona de contacto</string>
+    <string name="inputTelefono">Telefono de contacto</string>
+    <string name="inputEmail">E-Mail de contacto</string>
+    <string name="aceptar">Aceptar</string>
+
     <!-- Fragment detalle tags -->
     <string name="para">Para:</string>
     <string name="de">De:</string>
