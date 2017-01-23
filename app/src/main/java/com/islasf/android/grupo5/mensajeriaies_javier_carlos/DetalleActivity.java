@@ -1,6 +1,7 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,5 +70,25 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     @Override
     public void onEnviar() {
         //TODO: enviar mensaje
+        /*
+
+        ESTO ENVIA MENSAJES DE GMAIL:
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"sanchez.j.gomez@gmail.com", "fernandovado95@gmail.com", "carlos.ga.corpas@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "¡POR FIN HE INVENTADO ALGO QUE FUNCIONA!");
+        i.putExtra(Intent.EXTRA_TEXT, "JAJAJAJAJAJA. SIEMPRE GANO. PUTTTTTTOOOOOOOS.");
+        startActivity(Intent.createChooser(i, "Enviar correo..."));
+        */
+
+
+        /*
+
+        ESTO ENVIA MENSAJES DE SMS. TE DEJA ELEGIR LA APP COMO EL DE MAIL.
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + 691762950));
+        intent.putExtra("sms_body", "pollas");
+        startActivity(intent);
+        */
     }
 }
