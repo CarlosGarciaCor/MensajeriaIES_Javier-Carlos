@@ -1,7 +1,5 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 public class DetalleFragment extends Fragment {
 
@@ -60,14 +54,14 @@ public class DetalleFragment extends Fragment {
     }
 
     public void destinatarioListener(){
-        //TODO: Abrir list de contactos
+        listeners.onSeleccionarDestinatario();
     }
 
     public void remitenteListener(){
-        //TODO: Abrir nuevo fragment sobre datos de remitente
+        listeners.onSeleccionarRemitente();
     }
 
     public void enviar(){
-        //TODO: Enviar mensaje
+        listeners.onEnviar();
     }
 }

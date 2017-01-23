@@ -1,8 +1,9 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -10,6 +11,7 @@ import android.widget.RadioGroup;
 
 public class DetalleActivity extends AppCompatActivity implements DetalleListeners {
 
+    private Mensaje mensaje;
 
     private RadioGroup rgOpciones;
     private CheckBox cbUrgente;
@@ -36,11 +38,15 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         etAsunto = (EditText) findViewById(R.id.etAsunto);
         etMensaje = (EditText) findViewById(R.id.etMensaje);
 
+        //Inicilizamos el mensaje
+        Mensaje mensaje = new Mensaje();
+
     }
 
     @Override
     public void onSeleccionarDestinatario() {
-        //TODO: hacer y abrir fragment de list contactos
+        Intent i=new Intent(this, ContactosActivity.class);
+        startActivityForResult(i, 0);
     }
 
     @Override
@@ -49,7 +55,19 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Recoger el contacto a la vuelta de la lista y meterlo al Mensaje
+        if (resultCode==1){
+            Log.i("Contacto seleccionado", data.getStringExtra("Contacto"));
+        }
+
+        //TODO: resultCode para remitente = 1; recoger remitente y meterlo en Mensaje en otro if
+    }
+
+    @Override
     public void onEnviar() {
-        //TODO: enviar mensaje (validando)
+        //TODO: enviar mensaje
     }
 }

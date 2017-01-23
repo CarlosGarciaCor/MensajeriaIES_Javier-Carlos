@@ -16,12 +16,6 @@ public class MainActivity extends AppCompatActivity implements MenuListeners {
         fragment.setMenuListener(this);
     }
 
-    //TODO Como dejes esto así te pego un tiro Carlos (y yo otro)
-    public void diohmiowil (View v){
-        Intent sifunsionabien = new Intent(this, ProbatinasContactos.class);
-        startActivity(sifunsionabien);
-    }
-
     @Override
     public void onNuevoMensaje() {
         Intent i=new Intent(this, DetalleActivity.class);
