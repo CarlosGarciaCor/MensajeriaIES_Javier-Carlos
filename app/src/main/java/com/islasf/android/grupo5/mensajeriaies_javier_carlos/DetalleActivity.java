@@ -114,26 +114,34 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     @Override
     public void onEnviarSMS() {
         setCampos();
-        if (!mensaje.enviarMensajeSMS()){
-            Toast toast=Toast.makeText(this, "No pudo enviar el SMS porque faltan campos por rellenar", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        else {
-            mensaje.enviarMensajeSMS();
+
+        if (mensaje.validarMensajeSMS()){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + mensaje.getDestinatario().getTelefono()));
+            i.putExtra("sms_body", mensaje.getAsunto() + "\n[Mensaje]: " +mensaje.getCuerpoMensaje());
+            startActivity(Intent.createChooser(i, "Enviar sms..."));
             guardarEnBBDD();
         }
+
+        else
+            Toast.makeText(this, "No pudo enviar el SMS porque faltan campos por rellenar", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onEnviarEmail() {
         setCampos();
-        if (!mensaje.enviarMensajeEmail()){
-            Toast toast=Toast.makeText(this, "No pudo enviar el correo porque faltan campos por rellenar", Toast.LENGTH_SHORT);
-            toast.show();
+        if (mensaje.validarMensajeEmail()){
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{mensaje.getDestinatario().getEmail()});
+            i.putExtra(Intent.EXTRA_SUBJECT, mensaje.getAsunto());
+            i.putExtra(Intent.EXTRA_TEXT, mensaje.getCuerpoMensaje());
+            startActivity(Intent.createChooser(i, "Enviar correo..."));
+
+            guardarEnBBDD();
         }
         else{
-            mensaje.enviarMensajeEmail();
-            guardarEnBBDD();
+            Toast.makeText(this, "No pudo enviar el correo porque faltan campos por rellenar", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -3,6 +3,7 @@
     package="com.islasf.android.grupo5.mensajeriaies_javier_carlos">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -18,10 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetalleActivity" />
-        <activity android:name=".ProbatinasContactos" />
         <activity android:name=".ContactosActivity" />
         <activity android:name=".RemitenteActivity" />
-        <activity android:name=".HistorialActivity"></activity>
+        <activity android:name=".HistorialActivity"/>
     </application>
 
 </manifest>

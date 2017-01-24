@@ -55,7 +55,7 @@ public class Mensaje{
     }
 
     //Validación previa al envío de SMS
-    private boolean validarMensajeSMS(){
+    public boolean validarMensajeSMS(){
         if (destinatario!=null && !destinatario.isValid()) return false;
         if (remitente!=null && !remitente.isValid()) return false;
         if (!volveraALlamar && !deseaQueLeLlamen) return false;
@@ -65,7 +65,7 @@ public class Mensaje{
      }
 
     //Validación previa al envío de email
-    private boolean validarMensajeEmail(){
+    public boolean validarMensajeEmail(){
         if (destinatario!=null && !destinatario.isValid()) return false;
         if (remitente!=null && !remitente.isValid()) return false;
         if (!volveraALlamar && !deseaQueLeLlamen) return false;
@@ -77,7 +77,7 @@ public class Mensaje{
 
     public boolean enviarMensajeEmail(){
 
-        if (!validarMensajeEmail())return false;
+        if (!validarMensajeEmail()) return false;
 
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -87,16 +87,6 @@ public class Mensaje{
         context.startActivity(Intent.createChooser(i, "Enviar correo..."));
 
         return true;
-    }
-
-    public boolean enviarMensajeSMS(){
-
-        if (!validarMensajeSMS()) return false;
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + destinatario.getTelefono()));
-            i.putExtra("sms_body", this.asunto + "\n[Mensaje]: " +this.cuerpoMensaje);
-            context.startActivity(Intent.createChooser(i, "Enviar sms..."));
-        return true;
-
     }
 
     //------------------------ SETTERS Y GETTERS -----------------------------

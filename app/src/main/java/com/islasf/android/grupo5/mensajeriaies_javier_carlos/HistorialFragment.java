@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,15 @@ public class HistorialFragment extends Fragment {
 
         ArrayList<Mensaje> mensajes=recogida.doInBackground(helper.getReadableDatabase());
 
-        AdaptadorMensajes adaptador = new AdaptadorMensajes(getContext(), mensajes);
-        listadoMensajes.setAdapter(adaptador);
+        if (mensajes==null){
+            Toast.makeText(getContext(), "No se pudo conectar con la base de datos, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
+        }
+        else if (mensajes.size()==0){
+            Toast.makeText(getContext(), "El historial está vacío", Toast.LENGTH_LONG).show();
+        }
+        else {
+            AdaptadorMensajes adaptador = new AdaptadorMensajes(getContext(), mensajes);
+            listadoMensajes.setAdapter(adaptador);
+        }
     }
 }

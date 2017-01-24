@@ -31,30 +31,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:drawableStart="@drawable/ic_mail"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="@string/inputTelefono"
-                    android:id="@+id/etTelefono"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:drawableStart="@drawable/ic_telefono"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="@string/inputEmail"
-                    android:id="@+id/etEmail"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:hint="@string/particular"
                     android:drawableStart="@drawable/ic_persona"
@@ -77,6 +53,31 @@
                     android:textSize="14sp"
                     android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:drawableStart="@drawable/ic_telefono"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/inputTelefono"
+                    android:id="@+id/etTelefono"
+                    android:textSize="14sp"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:drawableStart="@drawable/ic_mail"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="@string/inputEmail"
+                    android:id="@+id/etEmail"
+                    android:textSize="14sp"
+                    android:layout_gravity="center_vertical"/>
+
             </LinearLayout>
 
             <LinearLayout

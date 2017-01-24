@@ -44,10 +44,10 @@ public class RecogidaMensajes extends AsyncTask<SQLiteDatabase, Void, ArrayList<
 
             c.close();
 
-            return mensajes; //TODO En la vuelta comprobar que tenga length, si no la tiene entonces no hay error pero no hay mensajes.
+            return mensajes;
         }
         else{
-            return null; //TODO En la vuelta comprobar que el array no sea null, si lo es tirar error de bbdd.
+            return null;
         }
     }
 }
