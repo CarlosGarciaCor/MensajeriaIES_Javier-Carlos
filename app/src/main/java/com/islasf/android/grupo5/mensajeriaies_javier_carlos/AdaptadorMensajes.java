@@ -34,9 +34,9 @@ public class AdaptadorMensajes extends ArrayAdapter<Mensaje>{
             item = inflador.inflate(R.layout.listado_mensajes, null);
 
             holder = new MensajesHolder();
-            holder.destinatario = (TextView)item.findViewById(R.id.tvDestinatario);
-            holder.remitente = (TextView)item.findViewById(R.id.tvRemitente);
-            holder.asunto = (TextView)item.findViewById(R.id.tvAsunto);
+            holder.destinatario = (TextView)item.findViewById(R.id.tvDestinatarioH);
+            holder.remitente = (TextView)item.findViewById(R.id.tvRemitenteH);
+            holder.asunto = (TextView)item.findViewById(R.id.tvAsuntoH);
             item.setTag(holder);
         }
         else{

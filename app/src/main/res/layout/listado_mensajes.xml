@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvDestinatario"
+            android:id="@+id/tvDestinatarioH"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="normal|bold"
             android:textSize="16sp" />
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvRemitente"
+            android:id="@+id/tvRemitenteH"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="normal|bold"
             android:textSize="15sp" />
@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvAsunto"
+            android:id="@+id/tvAsuntoH"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="normal|bold|italic"
             android:textSize="14sp" />
