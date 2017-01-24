@@ -40,11 +40,19 @@ public class DetalleFragment extends Fragment {
             }
         });
 
-        Button btnEnviar = (Button) getView().findViewById(R.id.btnEnviar);
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
+        Button btnEnviarSMS = (Button) getView().findViewById(R.id.btnEnviarSMS);
+        btnEnviarSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviar();
+                enviarSMS();
+            }
+        });
+
+        Button btnEnviarEmail = (Button) getView().findViewById(R.id.btnEnviarEmail);
+        btnEnviarEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviarEmail();
             }
         });
     }
@@ -61,7 +69,11 @@ public class DetalleFragment extends Fragment {
         listeners.onSeleccionarRemitente();
     }
 
-    public void enviar(){
-        listeners.onEnviar();
+    public void enviarSMS(){
+        listeners.onEnviarSMS();
+    }
+
+    public void enviarEmail(){
+        listeners.onEnviarEmail();
     }
 }

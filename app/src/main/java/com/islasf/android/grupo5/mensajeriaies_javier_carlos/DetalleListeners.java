@@ -8,6 +8,7 @@ public interface DetalleListeners {
 
     public void onSeleccionarDestinatario();
     public void onSeleccionarRemitente();
-    public void onEnviar();
+    public void onEnviarSMS();
+    public void onEnviarEmail();
 
 }

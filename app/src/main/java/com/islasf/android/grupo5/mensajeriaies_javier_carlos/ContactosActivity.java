@@ -21,7 +21,7 @@ public class ContactosActivity extends AppCompatActivity implements ContactosLis
         //Recogemos el contacto y volvemos al detalle
 
         Intent data=new Intent();
-        data.putExtra("Contacto", contacto.getNombre());
+        data.putExtra("Contacto", contacto);
         setResult(1, data);
         finish();
     }

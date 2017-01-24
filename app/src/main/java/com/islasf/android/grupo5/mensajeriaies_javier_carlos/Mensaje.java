@@ -1,10 +1,15 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
+import android.content.Context;
+import android.content.Intent;
+
+import java.io.Serializable;
+
 /**
  * Created by sanch on 22/01/2017.
  */
 
-public class Mensaje {
+public class Mensaje{
 
     private String asunto;
     private String cuerpoMensaje;
@@ -13,8 +18,11 @@ public class Mensaje {
     private boolean illCall;
     private boolean callMe;
     private final int ASUNTO_MAX_LENGTH=30;
+    private Context context;
 
-    public Mensaje(){};
+    public Mensaje(Context context){
+        this.context=context;
+    };
 
     public Mensaje(Contacto remitente, Contacto destinatario, String asunto, String cuerpoMensaje, boolean illCall, boolean callMe){
         this.remitente=remitente;
@@ -38,8 +46,8 @@ public class Mensaje {
     //Validación previa al envío de email
     private boolean validarMensajeEmail(){
         if (!destinatario.isValid()) return false;
-        if (!remitente.isValid()) return false;
-        if (!illCall && !callMe) return false;
+        //if (!remitente.isValid()) return false;
+        //if (!illCall && !callMe) return false;
         if (cuerpoMensaje.equals("")) return false;
         if (asunto.equals("") || asunto.length()>ASUNTO_MAX_LENGTH) return false;
 
@@ -48,8 +56,15 @@ public class Mensaje {
 
     public boolean enviarMensajeEmail(){
 
-        if (!validarMensajeEmail())return false;
-        //TODO: programar aquí el envío de SMS. True si se envía correctamente
+       // if (!validarMensajeEmail())return false;
+        //TODO: programar aquí el envío de email. True si se envía correctamente
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{destinatario.getEmail()});
+        i.putExtra(Intent.EXTRA_SUBJECT, this.asunto);
+        i.putExtra(Intent.EXTRA_TEXT, this.cuerpoMensaje);
+        context.startActivity(Intent.createChooser(i, "Enviar correo..."));
+
         return true;
 
     }
@@ -57,7 +72,7 @@ public class Mensaje {
     public boolean enviarMensajeSMS(){
 
         if (!validarMensajeSMS()) return false;
-        //TODO: programar aquí el envío de email. True si se envía correctamente
+            //TODO: programar aquí el envío de SMS. True si se envía correctamente
         return true;
 
     }

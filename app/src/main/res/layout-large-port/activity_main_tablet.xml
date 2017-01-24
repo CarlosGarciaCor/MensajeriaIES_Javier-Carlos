@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,12 +8,14 @@
         android:id="@+id/FrgMenu"
         android:layout_weight="40"
         android:layout_width="match_parent"
-        android:layout_height="0px" />
+        android:layout_height="0px"
+        tools:layout="@layout/fragment_menu" />
 
     <fragment class="com.islasf.android.grupo5.mensajeriaies_javier_carlos.DetalleFragment"
         android:id="@+id/FrgDetalle"
         android:layout_weight="105.90"
         android:layout_width="match_parent"
-        android:layout_height="0px" />
+        android:layout_height="0px"
+        tools:layout="@layout/fragment_detalle" />
 
 </LinearLayout>
