@@ -29,6 +29,7 @@ public class Contacto implements Serializable{
         this.telefono=telefono;
     }
 
+
     public String getEmail() {
         return email;
     }

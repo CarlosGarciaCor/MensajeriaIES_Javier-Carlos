@@ -1,6 +1,7 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,12 +115,14 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     public void onEnviarSMS() {
         setCampos();
         mensaje.enviarMensajeSMS();
+        guardarEnBBDD();
     }
 
     @Override
     public void onEnviarEmail() {
         setCampos();
         mensaje.enviarMensajeEmail();
+        guardarEnBBDD();
     }
 
     private void setCampos(){
@@ -130,6 +133,19 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
 
         mensaje.setAsunto(etAsunto.getText().toString());
         mensaje.setCuerpoMensaje(etMensaje.getText().toString());
+    }
+
+    private void guardarEnBBDD(){
+        MensajesSQLiteHelper dbhelper = new MensajesSQLiteHelper(this, "Mensajeitor3000", null, 1);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        if (db != null){
+            db.execSQL("INSERT OR IGNORE INTO mensaje(_id, asunto, cuerpo, urgente, llamara, destinatario, remitente) VALUES (null, '"
+                    +mensaje.getAsunto()+"', '"+mensaje.getCuerpoMensaje()+"', '"+mensaje.isUrgent()+"', '"+mensaje.isVolveraALlamar()+"', '"
+                    +mensaje.getDestinatario().getNombre()+"', '"+mensaje.getRemitente().getNombre()+"')");
+
+            db.close();
+        }
     }
 
     @Override
