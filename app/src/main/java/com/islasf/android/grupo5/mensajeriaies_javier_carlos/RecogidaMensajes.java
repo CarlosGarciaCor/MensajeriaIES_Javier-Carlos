@@ -31,15 +31,16 @@ public class RecogidaMensajes extends AsyncTask<SQLiteDatabase, Void, ArrayList<
                     asunto = c.getString(1);
                     cuerpo = c.getString(2);
                     hora = c.getString(7);
+
+                    Mensaje mensaje = new Mensaje();
+                    mensaje.setDestinatario(new Contacto(destinatario));
+                    mensaje.setRemitente(new Contacto(remitente));
+                    mensaje.setAsunto(asunto);
+                    mensaje.setCuerpoMensaje(cuerpo);
+                    mensaje.setHora(hora);
+                    mensajes.add(mensaje);
                 }
 
-                Mensaje mensaje = new Mensaje();
-                mensaje.setDestinatario(new Contacto(destinatario));
-                mensaje.setRemitente(new Contacto(remitente));
-                mensaje.setAsunto(asunto);
-                mensaje.setCuerpoMensaje(cuerpo);
-                mensaje.setHora(hora);
-                mensajes.add(mensaje);
             }
 
             c.close();
