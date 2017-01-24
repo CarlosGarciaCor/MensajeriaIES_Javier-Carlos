@@ -20,7 +20,8 @@
         <activity android:name=".DetalleActivity" />
         <activity android:name=".ProbatinasContactos" />
         <activity android:name=".ContactosActivity" />
-        <activity android:name=".RemitenteActivity"></activity>
+        <activity android:name=".RemitenteActivity" />
+        <activity android:name=".HistorialActivity"></activity>
     </application>
 
 </manifest>

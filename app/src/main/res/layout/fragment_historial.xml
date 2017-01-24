@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.islasf.android.grupo5.mensajeriaies_javier_carlos.ContactosFragment">
+    tools:context="com.islasf.android.grupo5.mensajeriaies_javier_carlos.HistorialFragment">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,12 +13,12 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.islasf.android.grupo5.mensajeriaies_javier_carlos.ContactosActivity">
+        tools:context="com.islasf.android.grupo5.mensajeriaies_javier_carlos.HistorialActivity">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lvContactos" />
+            android:id="@+id/lvHistorial" />
     </RelativeLayout>
 
 </FrameLayout>

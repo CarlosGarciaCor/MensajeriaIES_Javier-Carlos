@@ -113,13 +113,19 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     @Override
     public void onEnviarSMS() {
         setCampos();
-        mensaje.enviarMensajeSMS();
+        if (!mensaje.enviarMensajeSMS()){
+            Toast toast=Toast.makeText(this, "No pudo enviar el SMS porque faltan campos por rellenar", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @Override
     public void onEnviarEmail() {
         setCampos();
-        mensaje.enviarMensajeEmail();
+        if (!mensaje.enviarMensajeEmail()){
+            Toast toast=Toast.makeText(this, "No pudo enviar el correo porque faltan campos por rellenar", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private void setCampos(){

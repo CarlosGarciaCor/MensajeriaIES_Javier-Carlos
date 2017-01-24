@@ -20,7 +20,7 @@ public class Mensaje{
     private boolean deseaQueLeLlamen;
     private boolean justInfo;
     private boolean urgent;
-    private final int ASUNTO_MAX_LENGTH=30;
+    private final int ASUNTO_MAX_LENGTH=50;
     private Context context;
 
     public Mensaje(Context context){
@@ -53,8 +53,8 @@ public class Mensaje{
 
     //Validación previa al envío de SMS
     private boolean validarMensajeSMS(){
-        if (!destinatario.isValid()) return false;
-        if (!remitente.isValid()) return false;
+        if (destinatario!=null && !destinatario.isValid()) return false;
+        if (remitente!=null && !remitente.isValid()) return false;
         if (!volveraALlamar && !deseaQueLeLlamen) return false;
         if (cuerpoMensaje.equals("")) return false;
 
@@ -63,8 +63,8 @@ public class Mensaje{
 
     //Validación previa al envío de email
     private boolean validarMensajeEmail(){
-        if (!destinatario.isValid()) return false;
-        if (!remitente.isValid()) return false;
+        if (destinatario!=null && !destinatario.isValid()) return false;
+        if (remitente!=null && !remitente.isValid()) return false;
         if (!volveraALlamar && !deseaQueLeLlamen) return false;
         if (cuerpoMensaje.equals("")) return false;
         if (asunto.equals("") || asunto.length()>ASUNTO_MAX_LENGTH) return false;
@@ -84,7 +84,6 @@ public class Mensaje{
         context.startActivity(Intent.createChooser(i, "Enviar correo..."));
 
         return true;
-
     }
 
     public boolean enviarMensajeSMS(){
