@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class AdaptadorMensajes extends ArrayAdapter<Mensaje>{
 
-    ArrayList<Mensaje> listado;
+    private ArrayList<Mensaje> listado;
 
     public AdaptadorMensajes(Context context, ArrayList<Mensaje> objects) {
         super(context, R.layout.listado_mensajes, objects);
