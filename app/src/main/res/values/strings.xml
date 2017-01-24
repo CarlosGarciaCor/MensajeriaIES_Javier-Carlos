@@ -33,6 +33,15 @@
     <string name="enviarEmail">Enviar e-mail</string>
 
 
+    <string name="mensajeriaIES">Aplicación de mensajería del I.E.S. Islas Filipinas. ©</string>
+    <string name="descripcionlogo">Logo del instituto Islas Filipinas.</string>
+    <string name="textoTocho">Esta aplicación ha sido desarrollada por Carlos García Corpas y Javier Sánchez Gómez con fines didácticos. <br/>Sobre nosotros: Somos dos
+    estudiantes de segundo año del grado de formación profesional de Desarrollo de Aplicaciones Multiplataforma. Hemos desarrollado como parte de nuestra formación esta aplicación,
+    emulando digitalmente uno de los servicios de la consejería del instituto como es el informar a los docentes y demás personal del instituto sobre cuando les llega una llamada o aviso.<br/>
+    El servicio actualmente es bastante precario ya que se hace a papel, y esto propicia las pérdidas y las equivocaciones. Siendo así, y bajo la recomendación de nuestro docente, Felipe
+    Cabeza Leiva, nos decidimos a desarrollar esta aplicación.</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
