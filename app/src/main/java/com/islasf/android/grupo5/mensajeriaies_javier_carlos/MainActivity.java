@@ -3,7 +3,6 @@ package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements MenuListeners {
 
@@ -24,7 +23,8 @@ public class MainActivity extends AppCompatActivity implements MenuListeners {
 
     @Override
     public void onHistorial() {
-        //TODO: intent a la actividad del fragment de historial
+        Intent i=new Intent(this, HistorialActivity.class);
+        startActivity(i);
     }
 
     @Override

@@ -7,4 +7,5 @@ package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 public interface ContactosListeners {
 
     public void onSelectContacto(Contacto contacto);
+
 }

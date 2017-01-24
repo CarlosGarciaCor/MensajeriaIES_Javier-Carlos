@@ -93,7 +93,7 @@ public class Mensaje{
 
         if (!validarMensajeSMS()) return false;
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + destinatario.getTelefono()));
-            i.putExtra("sms_body", this.cuerpoMensaje);
+            i.putExtra("sms_body", this.asunto + "\n[Mensaje]: " +this.cuerpoMensaje);
             context.startActivity(Intent.createChooser(i, "Enviar sms..."));
         return true;
 
