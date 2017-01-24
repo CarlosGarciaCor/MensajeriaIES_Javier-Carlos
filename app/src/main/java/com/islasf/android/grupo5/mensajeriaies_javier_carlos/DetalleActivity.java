@@ -1,6 +1,7 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -117,6 +118,10 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
             Toast toast=Toast.makeText(this, "No pudo enviar el SMS porque faltan campos por rellenar", Toast.LENGTH_SHORT);
             toast.show();
         }
+        else {
+            mensaje.enviarMensajeSMS();
+            guardarEnBBDD();
+        }
     }
 
     @Override
@@ -125,6 +130,10 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         if (!mensaje.enviarMensajeEmail()){
             Toast toast=Toast.makeText(this, "No pudo enviar el correo porque faltan campos por rellenar", Toast.LENGTH_SHORT);
             toast.show();
+        }
+        else{
+            mensaje.enviarMensajeEmail();
+            guardarEnBBDD();
         }
     }
 
@@ -136,6 +145,19 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
 
         mensaje.setAsunto(etAsunto.getText().toString());
         mensaje.setCuerpoMensaje(etMensaje.getText().toString());
+    }
+
+    private void guardarEnBBDD(){
+        MensajesSQLiteHelper dbhelper = new MensajesSQLiteHelper(this, "Mensajeitor3000", null, 1);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        if (db != null){
+            db.execSQL("INSERT OR IGNORE INTO mensaje(_id, asunto, cuerpo, urgente, llamara, destinatario, remitente) VALUES (null, '"
+                    +mensaje.getAsunto()+"', '"+mensaje.getCuerpoMensaje()+"', '"+mensaje.isUrgent()+"', '"+mensaje.isVolveraALlamar()+"', '"
+                    +mensaje.getDestinatario().getNombre()+"', '"+mensaje.getRemitente().getNombre()+"')");
+
+            db.close();
+        }
     }
 
     @Override

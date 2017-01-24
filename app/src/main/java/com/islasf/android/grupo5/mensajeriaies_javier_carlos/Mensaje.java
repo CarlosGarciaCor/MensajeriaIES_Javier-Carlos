@@ -27,6 +27,8 @@ public class Mensaje{
         this.context=context;
     };
 
+    public Mensaje(){}
+
     public Mensaje(Contacto remitente, Contacto destinatario, String asunto, String cuerpoMensaje, boolean illCall, boolean callMe){
         this.remitente=remitente;
         this.destinatario=destinatario;
@@ -148,5 +150,13 @@ public class Mensaje{
     public void isJustInfo() {
         this.justInfo=true;
         this.urgent=false;
+    }
+
+    public boolean isUrgent() {
+        return urgent;
+    }
+
+    public boolean isVolveraALlamar() {
+        return volveraALlamar;
     }
 }

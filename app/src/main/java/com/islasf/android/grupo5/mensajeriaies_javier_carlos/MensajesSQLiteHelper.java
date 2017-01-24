@@ -10,8 +10,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MensajesSQLiteHelper extends SQLiteOpenHelper{
 
-    String sqlcreacion = ""; //TODO Cuando confirmemos estructura.
-    String sqldrop = "";
+    private String sqlmensaje =
+            "CREATE TABLE mensaje " +
+                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "asunto TEXT," +
+                    "cuerpo TEXT," +
+                    "urgente BOOLEAN," +
+                    "llamara BOOLEAN," +
+                    "destinatario TEXT," +
+                    "remitente TEXT)";
+
 
     public MensajesSQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -19,13 +27,13 @@ public class MensajesSQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(sqlcreacion);
+        db.execSQL(sqlmensaje);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(sqldrop);
+        db.execSQL("DROP TABLE IF EXISTS mensaje");
 
-        db.execSQL(sqlcreacion);
+        db.execSQL(sqlmensaje);
     }
 }
