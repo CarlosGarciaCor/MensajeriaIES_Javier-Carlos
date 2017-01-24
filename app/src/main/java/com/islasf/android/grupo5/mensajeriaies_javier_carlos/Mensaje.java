@@ -2,6 +2,7 @@ package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import java.io.Serializable;
 
@@ -31,8 +32,35 @@ public class Mensaje{
         this.cuerpoMensaje=cuerpoMensaje;
         this.illCall=illCall;
         this.callMe=callMe;
+
+        modelarMensaje();
     }
 
+
+    private void modelarMensaje(){
+        String asuntodefinitivo = "";
+        /*
+         TODO añadir al asunto del mensaje todo el rollo sobre si es urgente y tal.
+         Ejemplos:
+            [URGENTE]Aplazamiento de los muertos.
+            [INFO]Ábrete una cuenta en nuestros cojones.
+
+         En cuanto al cuerpo:
+            Mensaje:
+                Me coméis la polla.
+            Remitente:
+                El remitente.
+            Especificaciones:
+                Volverá a llamar / Llama tú puto gordo.
+
+            Mensaje enviado utilizando el servicio de mensajería del IES Islas Filipinas.
+
+
+
+            COSA GORDSAAAAAA! Esto en los email muy bonitos pero en los sms estamos limitated xdd
+        */
+
+    }
     //Validación previa al envío de SMS
     private boolean validarMensajeSMS(){
         if (!destinatario.isValid()) return false;
@@ -73,6 +101,9 @@ public class Mensaje{
 
         if (!validarMensajeSMS()) return false;
             //TODO: programar aquí el envío de SMS. True si se envía correctamente
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + destinatario.getTelefono()));
+            i.putExtra("sms_body", this.cuerpoMensaje);
+            context.startActivity(Intent.createChooser(i, "Enviar sms..."));
         return true;
 
     }
