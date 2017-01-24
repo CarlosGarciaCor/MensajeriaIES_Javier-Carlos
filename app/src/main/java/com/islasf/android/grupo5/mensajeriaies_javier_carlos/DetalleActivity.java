@@ -16,29 +16,14 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
 
     private Mensaje mensaje;
 
-    private RadioGroup rgOpciones;
-    private CheckBox cbUrgente;
-    private CheckBox cbInfo;
+    private RadioButton rbUrgente;
+    private RadioButton rbInfo;
     private RadioButton rbtnVolvera;
     private RadioButton rbtnDesea;
     private EditText etAsunto;
     private EditText etMensaje;
     private Button btnDestinatario;
     private Button btnRemitente;
-/*
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        mensaje = (Mensaje)savedInstanceState.getSerializable("Mensaje");
-    }
-/*
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putSerializable("Mensaje", mensaje);
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +34,8 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         fragment.setListeners(this);
 
         //Initializamos las Views de las que se saca la info del mensaje
-        rgOpciones = (RadioGroup) findViewById(R.id.rgOpciones);
-        cbInfo = (CheckBox) findViewById(R.id.cbInfo);
-        cbUrgente = (CheckBox) findViewById(R.id.cbUrgente);
+        rbInfo = (RadioButton) findViewById(R.id.rbInfo);
+        rbUrgente = (RadioButton) findViewById(R.id.rbUrgente);
         rbtnDesea = (RadioButton) findViewById(R.id.rbtnDesea);
         rbtnVolvera = (RadioButton) findViewById(R.id.rbtnVolvera);
         etAsunto = (EditText) findViewById(R.id.etAsunto);
@@ -59,8 +43,9 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         btnDestinatario = (Button) findViewById(R.id.btnDestinatario);
         btnRemitente = (Button) findViewById(R.id.btnRemitente);
 
+        rbtnDesea.setChecked(true);
+        rbInfo.setChecked(true);
         mensaje = new Mensaje(this.getApplicationContext());
-
     }
 
     @Override
@@ -91,6 +76,9 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     }
 
     private void setCampos(){
+        mensaje.setJustInfo(rbInfo.isChecked());
+        mensaje.setUrgent(rbUrgente.isChecked());
+
         mensaje.setCallMe(rbtnDesea.isChecked());
         mensaje.setIllCall(rbtnVolvera.isChecked());
 
@@ -116,27 +104,4 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
             btnRemitente.setText(remitente.getNombre());
         }
     }
-
-    /*
-    @Override
-    public void onEnviar() {
-        //TODO: enviar mensaje
-
-        if ()
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"sanchez.j.gomez@gmail.com", "fernandovado95@gmail.com", "carlos.ga.corpas@gmail.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "¡POR FIN HE INVENTADO ALGO QUE FUNCIONA!");
-        i.putExtra(Intent.EXTRA_TEXT, "JAJAJAJAJAJA. SIEMPRE GANO. PUTTTTTTOOOOOOOS.");
-        startActivity(Intent.createChooser(i, "Enviar correo..."));
-
-
-        /*
-
-        ESTO ENVIA MENSAJES DE SMS. TE DEJA ELEGIR LA APP COMO EL DE MAIL.
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + 691762950));
-        intent.putExtra("sms_body", "pollas");
-        startActivity(intent);
-
-        }*/
-    }
+}

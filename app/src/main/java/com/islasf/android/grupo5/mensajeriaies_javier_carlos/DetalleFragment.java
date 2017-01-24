@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class DetalleFragment extends Fragment {
 
@@ -53,6 +55,34 @@ public class DetalleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 enviarEmail();
+            }
+        });
+
+        RadioButton rbInfo = (RadioButton) getView().findViewById(R.id.rbInfo);
+        RadioButton rbUrg = (RadioButton) getView().findViewById(R.id.rbUrgente);
+
+        RadioButton rbDesea = (RadioButton) getView().findViewById(R.id.rbtnDesea);
+        RadioButton rbVolvera = (RadioButton) getView().findViewById(R.id.rbtnVolvera);
+
+        RadioGroup g1 = (RadioGroup) getView().findViewById(R.id.rgOpciones1);
+        g1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbtnDesea: ((RadioButton)group.findViewById(R.id.rbtnVolvera)).setChecked(false);; break;
+                    case R.id.rbtnVolvera: ((RadioButton)group.findViewById(R.id.rbtnDesea)).setChecked(false);; break;
+                }
+            }
+        });
+
+        RadioGroup g2 = (RadioGroup) getView().findViewById(R.id.rgOpciones2);
+            g2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbInfo: ((RadioButton)group.findViewById(R.id.rbUrgente)).setChecked(false);; break;
+                    case R.id.rbUrgente: ((RadioButton)group.findViewById(R.id.rbInfo)).setChecked(false);; break;
+                }
             }
         });
     }

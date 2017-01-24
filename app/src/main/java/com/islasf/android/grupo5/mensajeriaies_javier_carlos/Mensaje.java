@@ -2,6 +2,7 @@ package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import java.io.Serializable;
 
@@ -17,6 +18,8 @@ public class Mensaje{
     private Contacto remitente;
     private boolean illCall;
     private boolean callMe;
+    private boolean justInfo;
+    private boolean urgent;
     private final int ASUNTO_MAX_LENGTH=30;
     private Context context;
 
@@ -46,8 +49,8 @@ public class Mensaje{
     //Validación previa al envío de email
     private boolean validarMensajeEmail(){
         if (!destinatario.isValid()) return false;
-        //if (!remitente.isValid()) return false;
-        //if (!illCall && !callMe) return false;
+        if (!remitente.isValid()) return false;
+        if (!illCall && !callMe) return false;
         if (cuerpoMensaje.equals("")) return false;
         if (asunto.equals("") || asunto.length()>ASUNTO_MAX_LENGTH) return false;
 
@@ -73,6 +76,9 @@ public class Mensaje{
 
         if (!validarMensajeSMS()) return false;
             //TODO: programar aquí el envío de SMS. True si se envía correctamente
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + 691762950));
+            intent.putExtra("sms_body", "pollas");
+            context.startActivity(intent);
         return true;
 
     }
@@ -125,5 +131,21 @@ public class Mensaje{
 
     public void setCallMe(boolean callMe) {
         this.callMe = callMe;
+    }
+
+    public boolean isJustInfo() {
+        return justInfo;
+    }
+
+    public void setJustInfo(boolean justInfo) {
+        this.justInfo = justInfo;
+    }
+
+    public boolean isUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(boolean urgent) {
+        this.urgent = urgent;
     }
 }

@@ -51,24 +51,17 @@
             android:layout_margin="10dp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioGroup
-                android:id="@+id/rgOpciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <RadioGroup
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:weightSum="2">
+                        android:layout_marginEnd="10sp"
+                        android:id="@+id/rgOpciones1">
 
                         <RadioButton
                             android:id="@+id/rbtnDesea"
@@ -77,20 +70,6 @@
                             android:text="@string/deseaQueLeLlamen"
                             android:layout_weight="1"/>
 
-                        <CheckBox
-                            android:id="@+id/cbInfo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/paraSuInfo"
-                            android:layout_weight="1"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2">
-
                         <RadioButton
                             android:id="@+id/rbtnVolvera"
                             android:layout_width="match_parent"
@@ -98,17 +77,30 @@
                             android:text="@string/volveraALlamar"
                             android:layout_weight="1"/>
 
-                        <CheckBox
-                            android:id="@+id/cbUrgente"
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rgOpciones2">
+
+                        <RadioButton
+                            android:id="@+id/rbInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/paraSuInfo"
+                            android:layout_weight="1"/>
+
+                         <RadioButton
+                            android:id="@+id/rbUrgente"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/urgente"
                             android:layout_weight="1"/>
 
-                    </LinearLayout>
-                </LinearLayout>
+                    </RadioGroup>
 
-            </RadioGroup>
+
 
         </LinearLayout>
 
@@ -137,7 +129,8 @@
                 <EditText
                     android:id="@+id/etAsunto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
@@ -152,7 +145,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:inputType="textMultiLine"
-                android:ems="10"/>
+                android:ems="10"
+                android:labelFor="@+id/etMensaje"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -164,13 +158,15 @@
                     android:id="@+id/btnEnviarSMS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/enviarSMS"/>
+                    android:text="@string/enviarSMS"
+                    style="none"/>
 
                 <Button
                     android:id="@+id/btnEnviarEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/enviarEmail"/>
+                    android:text="@string/enviarEmail"
+                    style="none"/>
 
             </LinearLayout>
 
