@@ -34,7 +34,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         DetalleFragment fragment=(DetalleFragment)getSupportFragmentManager().findFragmentById(R.id.FrgDetalle);
         fragment.setListeners(this);
 
-        mensaje = new Mensaje(this.getApplicationContext());
+        mensaje = new Mensaje();
 
         inicializarComponentes();
     }
@@ -187,5 +187,40 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
             btnRemitente.setText(remitente.getNombre());
             etAsunto.setText(mensaje.getAsunto());
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        mensaje.setCuerpoMensaje(etMensaje.getText().toString());
+        outState.putSerializable("Mensaje", mensaje);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        mensaje=(Mensaje)savedInstanceState.getSerializable("Mensaje");
+
+        if (mensaje.getDestinatario()!=null)
+            btnDestinatario.setText(mensaje.getDestinatario().getNombre());
+        if (mensaje.getRemitente()!=null)
+            btnRemitente.setText(mensaje.getRemitente().getNombre());
+
+        if (mensaje.isVolveraALlamar())
+            rbtnVolvera.setChecked(true);
+        else
+            rbtnDesea.setChecked(true);
+
+        if (mensaje.isUrgent())
+            rbUrgente.setChecked(true);
+        else
+            rbInfo.setChecked(true);
+
+        mensaje.modelarAsunto();
+        etAsunto.setText(mensaje.getAsunto());
+
+        etMensaje.setText(mensaje.getCuerpoMensaje());
     }
 }

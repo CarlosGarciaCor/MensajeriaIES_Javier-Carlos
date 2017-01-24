@@ -10,8 +10,9 @@ import java.io.Serializable;
  * Created by sanch on 22/01/2017.
  */
 
-public class Mensaje{
+public class Mensaje implements Serializable{
 
+    private static final long serialVersionUID=2L;
     private String asunto;
     private String cuerpoMensaje;
     private Contacto destinatario;
@@ -22,11 +23,6 @@ public class Mensaje{
     private boolean urgent;
     private String hora;
     private final int ASUNTO_MAX_LENGTH=50;
-    private Context context;
-
-    public Mensaje(Context context){
-        this.context=context;
-    };
 
     public Mensaje(){}
 
@@ -71,20 +67,6 @@ public class Mensaje{
         if (!volveraALlamar && !deseaQueLeLlamen) return false;
         if (cuerpoMensaje.equals("")) return false;
         if (asunto.equals("") || asunto.length()>ASUNTO_MAX_LENGTH) return false;
-
-        return true;
-    }
-
-    public boolean enviarMensajeEmail(){
-
-        if (!validarMensajeEmail()) return false;
-
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL, new String[]{destinatario.getEmail()});
-        i.putExtra(Intent.EXTRA_SUBJECT, this.asunto);
-        i.putExtra(Intent.EXTRA_TEXT, this.cuerpoMensaje);
-        context.startActivity(Intent.createChooser(i, "Enviar correo..."));
 
         return true;
     }
