@@ -8,30 +8,41 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:weightSum="4">
 
         <TextView
-            android:layout_width="match_parent"
+            android:text="@string/de"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvDestinatarioH"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textStyle="normal|bold"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+            android:id="@+id/textView"
+            android:layout_marginEnd="5dp"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvRemitenteH"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="normal|bold"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            android:text="Antonio Cabeza"
+            android:layout_marginEnd="15dp"/>
+
+        <TextView
+            android:text="@string/para"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDestinatarioH"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"
+            android:textSize="14sp"
+            android:text="Carlos García"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,13 +52,44 @@
         android:layout_weight="1">
 
         <TextView
-            android:layout_width="match_parent"
+            android:text="24/01/2017 21:12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvHora"
+            android:gravity="end"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvAsuntoH"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="normal|bold|italic"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:text="Asunto"
+            android:layout_weight="1" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:text="Antonio te ha llamado para comentarte que no existe el mundo del que hablaba platón, que todos somos imbéciles y que comes pollas al mediodía mientras aristoteles se hace los canutos."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCuerpo"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

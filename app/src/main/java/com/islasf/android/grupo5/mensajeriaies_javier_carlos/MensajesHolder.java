@@ -9,4 +9,6 @@ public class MensajesHolder {
     TextView destinatario;
     TextView remitente;
     TextView asunto;
+    TextView cuerpo;
+    TextView hora;
 }

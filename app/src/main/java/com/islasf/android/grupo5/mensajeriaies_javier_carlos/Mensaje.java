@@ -20,6 +20,7 @@ public class Mensaje{
     private boolean deseaQueLeLlamen;
     private boolean justInfo;
     private boolean urgent;
+    private String hora;
     private final int ASUNTO_MAX_LENGTH=50;
     private Context context;
 
@@ -158,5 +159,13 @@ public class Mensaje{
 
     public boolean isVolveraALlamar() {
         return volveraALlamar;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 }

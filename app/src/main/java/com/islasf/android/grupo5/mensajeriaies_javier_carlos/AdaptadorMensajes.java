@@ -34,6 +34,8 @@ public class AdaptadorMensajes extends ArrayAdapter<Mensaje>{
             item = inflador.inflate(R.layout.listado_mensajes, null);
 
             holder = new MensajesHolder();
+            holder.cuerpo = (TextView)item.findViewById(R.id.tvCuerpo);
+            holder.hora = (TextView)item.findViewById(R.id.tvHora);
             holder.destinatario = (TextView)item.findViewById(R.id.tvDestinatarioH);
             holder.remitente = (TextView)item.findViewById(R.id.tvRemitenteH);
             holder.asunto = (TextView)item.findViewById(R.id.tvAsuntoH);
@@ -46,6 +48,8 @@ public class AdaptadorMensajes extends ArrayAdapter<Mensaje>{
         holder.destinatario.setText(listado.get(position).getDestinatario().getNombre());
         holder.remitente.setText(listado.get(position).getRemitente().getNombre());
         holder.asunto.setText(listado.get(position).getAsunto());
+        holder.cuerpo.setText(listado.get(position).getCuerpoMensaje());
+        holder.hora.setText(listado.get(position).getHora());
 
         return item;
     }

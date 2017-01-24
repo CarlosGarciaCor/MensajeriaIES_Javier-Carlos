@@ -18,7 +18,8 @@ public class MensajesSQLiteHelper extends SQLiteOpenHelper{
                     "urgente BOOLEAN," +
                     "llamara BOOLEAN," +
                     "destinatario TEXT," +
-                    "remitente TEXT)";
+                    "remitente TEXT," +
+                    "fecha DATETIME DEFAULT CURRENT_TIMESTAMP)";
 
 
     public MensajesSQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
