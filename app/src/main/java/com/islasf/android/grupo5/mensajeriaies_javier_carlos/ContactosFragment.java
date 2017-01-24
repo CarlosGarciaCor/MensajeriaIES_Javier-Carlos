@@ -48,7 +48,7 @@ public class ContactosFragment extends Fragment {
                 String telefono = ((TextView) view.findViewById(R.id.tvTelefono)).getText().toString();
                 String email = ((TextView) view.findViewById(R.id.tvEmail)).getText().toString();
 
-                listeners.onSelectContacto(new Contacto(nombre, email, telefono));
+                listeners.onSelectContacto(new Contacto(nombre, null, email, telefono));
             }
         });
 

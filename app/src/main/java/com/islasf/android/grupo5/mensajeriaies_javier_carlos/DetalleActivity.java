@@ -71,7 +71,11 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
 
     @Override
     public void onSeleccionarRemitente() {
-        //TODO: hacer y lanzar fragment de datos del remitente
+        Intent i=new Intent(this, RemitenteActivity.class);
+        if (mensaje.getRemitente()!=null)
+            i.putExtra("Remitente", mensaje.getRemitente());
+
+        startActivityForResult(i, 1);
     }
 
     @Override
@@ -103,10 +107,14 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
             Contacto destinatario=(Contacto)data.getSerializableExtra("Contacto");
             mensaje.setDestinatario(destinatario);
             btnDestinatario.setText(destinatario.getNombre());
-
         }
 
-        //TODO: resultCode para remitente = 2; recoger remitente y meterlo en Mensaje en otro if
+        //recoger remitente y meterlo en Mensaje
+        if (requestCode==1 && resultCode==2){
+            Contacto remitente = (Contacto)data.getSerializableExtra("Contacto");
+            mensaje.setRemitente(remitente);
+            btnRemitente.setText(remitente.getNombre());
+        }
     }
 
     /*

@@ -44,7 +44,7 @@ public class RecogidaContactos extends AsyncTask<ContentResolver, Void, ArrayLis
 
             curEmail.close();
 
-            Contacto c1 = new Contacto(nombre, email, telefono);
+            Contacto c1 = new Contacto(nombre, null, email, telefono);
             listaContactos.add(c1);
         }
 
