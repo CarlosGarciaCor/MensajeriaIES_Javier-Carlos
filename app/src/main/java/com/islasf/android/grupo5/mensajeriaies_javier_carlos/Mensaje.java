@@ -16,8 +16,8 @@ public class Mensaje{
     private String cuerpoMensaje;
     private Contacto destinatario;
     private Contacto remitente;
-    private boolean illCall;
-    private boolean callMe;
+    private boolean volveraALlamar;
+    private boolean deseaQueLeLlamen;
     private boolean justInfo;
     private boolean urgent;
     private final int ASUNTO_MAX_LENGTH=30;
@@ -32,42 +32,30 @@ public class Mensaje{
         this.destinatario=destinatario;
         this.asunto=asunto;
         this.cuerpoMensaje=cuerpoMensaje;
-        this.illCall=illCall;
-        this.callMe=callMe;
+        this.volveraALlamar=illCall;
+        this.deseaQueLeLlamen=callMe;
 
-        modelarMensaje();
+        modelarAsunto();
     }
 
 
-    private void modelarMensaje(){
-        String asuntodefinitivo = "";
-        /*
-         TODO añadir al asunto del mensaje todo el rollo sobre si es urgente y tal.
-         Ejemplos:
-            [URGENTE]Aplazamiento de los muertos.
-            [INFO]Ábrete una cuenta en nuestros cojones.
+    public void modelarAsunto(){
 
-         En cuanto al cuerpo:
-            Mensaje:
-                Me coméis la polla.
-            Remitente:
-                El remitente.
-            Especificaciones:
-                Volverá a llamar / Llama tú puto gordo.
+        if (urgent) asunto="[URG]: ";
+        else asunto="[Info]: ";
 
-            Mensaje enviado utilizando el servicio de mensajería del IES Islas Filipinas.
+        if (remitente!=null) asunto=asunto+remitente.getNombre()+" ";
+        else asunto=asunto+"<Alguien> ";
 
-
-
-            COSA GORDSAAAAAA! Esto en los email muy bonitos pero en los sms estamos limitated xdd
-        */
-
+        if (deseaQueLeLlamen) asunto=asunto+"desea que le llame.";
+        else asunto=asunto+"volverá a llamar.";
     }
+
     //Validación previa al envío de SMS
     private boolean validarMensajeSMS(){
         if (!destinatario.isValid()) return false;
         if (!remitente.isValid()) return false;
-        if (!illCall && !callMe) return false;
+        if (!volveraALlamar && !deseaQueLeLlamen) return false;
         if (cuerpoMensaje.equals("")) return false;
 
         return true;
@@ -77,7 +65,7 @@ public class Mensaje{
     private boolean validarMensajeEmail(){
         if (!destinatario.isValid()) return false;
         if (!remitente.isValid()) return false;
-        if (!illCall && !callMe) return false;
+        if (!volveraALlamar && !deseaQueLeLlamen) return false;
         if (cuerpoMensaje.equals("")) return false;
         if (asunto.equals("") || asunto.length()>ASUNTO_MAX_LENGTH) return false;
 
@@ -86,8 +74,8 @@ public class Mensaje{
 
     public boolean enviarMensajeEmail(){
 
-       // if (!validarMensajeEmail())return false;
-        //TODO: programar aquí el envío de email. True si se envía correctamente
+        if (!validarMensajeEmail())return false;
+
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_EMAIL, new String[]{destinatario.getEmail()});
@@ -102,7 +90,6 @@ public class Mensaje{
     public boolean enviarMensajeSMS(){
 
         if (!validarMensajeSMS()) return false;
-            //TODO: programar aquí el envío de SMS. True si se envía correctamente
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + destinatario.getTelefono()));
             i.putExtra("sms_body", this.cuerpoMensaje);
             context.startActivity(Intent.createChooser(i, "Enviar sms..."));
@@ -144,35 +131,23 @@ public class Mensaje{
         this.asunto = asunto;
     }
 
-    public boolean isIllCall() {
-        return illCall;
+    public void deseaQueLoLlamen() {
+        this.deseaQueLeLlamen=true;
+        this.volveraALlamar=false;
     }
 
-    public void setIllCall(boolean illCall) {
-        this.illCall = illCall;
+    public void volveraALlamar() {
+        this.volveraALlamar=true;
+        this.deseaQueLeLlamen=false;
     }
 
-    public boolean isCallMe() {
-        return callMe;
+    public void esUrgente() {
+        this.urgent=true;
+        this.justInfo=false;
     }
 
-    public void setCallMe(boolean callMe) {
-        this.callMe = callMe;
-    }
-
-    public boolean isJustInfo() {
-        return justInfo;
-    }
-
-    public void setJustInfo(boolean justInfo) {
-        this.justInfo = justInfo;
-    }
-
-    public boolean isUrgent() {
-        return urgent;
-    }
-
-    public void setUrgent(boolean urgent) {
-        this.urgent = urgent;
+    public void isJustInfo() {
+        this.justInfo=true;
+        this.urgent=false;
     }
 }

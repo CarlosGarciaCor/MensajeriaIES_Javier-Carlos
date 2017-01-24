@@ -33,6 +33,12 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         DetalleFragment fragment=(DetalleFragment)getSupportFragmentManager().findFragmentById(R.id.FrgDetalle);
         fragment.setListeners(this);
 
+        mensaje = new Mensaje(this.getApplicationContext());
+
+        inicializarComponentes();
+    }
+
+    private void inicializarComponentes(){
         //Initializamos las Views de las que se saca la info del mensaje
         rbInfo = (RadioButton) findViewById(R.id.rbInfo);
         rbUrgente = (RadioButton) findViewById(R.id.rbUrgente);
@@ -43,9 +49,50 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         btnDestinatario = (Button) findViewById(R.id.btnDestinatario);
         btnRemitente = (Button) findViewById(R.id.btnRemitente);
 
+        RadioGroup g1 = (RadioGroup) findViewById(R.id.rgOpciones1);
+        g1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbtnDesea:
+                        rbtnVolvera.setChecked(false);
+                        mensaje.deseaQueLoLlamen();
+                        break;
+                    case R.id.rbtnVolvera:
+                        rbtnDesea.setChecked(false);
+                        mensaje.volveraALlamar();
+                        break;
+                }
+
+                mensaje.modelarAsunto();
+                etAsunto.setText(mensaje.getAsunto());
+            }
+        });
+
+        RadioGroup g2 = (RadioGroup) findViewById(R.id.rgOpciones2);
+        g2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbInfo:
+                        rbUrgente.setChecked(false);
+                        mensaje.isJustInfo();
+                        break;
+                    case R.id.rbUrgente:
+                        rbInfo.setChecked(false);
+                        mensaje.esUrgente();
+                        break;
+                }
+
+                mensaje.modelarAsunto();
+                etAsunto.setText(mensaje.getAsunto());
+            }
+        });
+
         rbtnDesea.setChecked(true);
         rbInfo.setChecked(true);
-        mensaje = new Mensaje(this.getApplicationContext());
+        mensaje.modelarAsunto();
+        etAsunto.setText(mensaje.getAsunto());
     }
 
     @Override
@@ -76,11 +123,10 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
     }
 
     private void setCampos(){
-        mensaje.setJustInfo(rbInfo.isChecked());
-        mensaje.setUrgent(rbUrgente.isChecked());
-
-        mensaje.setCallMe(rbtnDesea.isChecked());
-        mensaje.setIllCall(rbtnVolvera.isChecked());
+        if (rbtnDesea.isChecked())
+            mensaje.deseaQueLoLlamen();
+        else
+            mensaje.volveraALlamar();
 
         mensaje.setAsunto(etAsunto.getText().toString());
         mensaje.setCuerpoMensaje(etMensaje.getText().toString());
@@ -101,7 +147,9 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         if (requestCode==1 && resultCode==2){
             Contacto remitente = (Contacto)data.getSerializableExtra("Contacto");
             mensaje.setRemitente(remitente);
+            mensaje.modelarAsunto();
             btnRemitente.setText(remitente.getNombre());
+            etAsunto.setText(mensaje.getAsunto());
         }
     }
 }

@@ -45,9 +45,9 @@ public class Contacto implements Serializable{
 
     public boolean isValid(){
 
-        if (!email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) return false;
+        //if (!email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) return false;
         if (nombre.equals("")) return false;
-        if (telefono.equals(0)) return false; //TODO: buscar una buena regex para tfnos
+        if (telefono.equals("")) return false; //TODO: buscar una buena regex para tfnos y emails
 
         return true;
     }

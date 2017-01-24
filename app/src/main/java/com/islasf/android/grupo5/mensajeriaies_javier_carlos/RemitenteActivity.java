@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RemitenteActivity extends AppCompatActivity implements RemitenteListeners {
 
@@ -38,21 +39,21 @@ public class RemitenteActivity extends AppCompatActivity implements RemitenteLis
 
     @Override
     public void onAceptar() {
-        if (valid()){
-            Contacto contacto = new Contacto(etPersona.getText().toString(),
-                    etEmpresa.getText().toString(),
-                    etEmail.getText().toString(),
-                    etTelefono.getText().toString());
-
+        Contacto contacto = new Contacto(etPersona.getText().toString(),
+                etEmpresa.getText().toString(),
+                etEmail.getText().toString(),
+                etTelefono.getText().toString());
+        if (contacto.isValid()){
             Intent data= new Intent();
             data.putExtra("Contacto", contacto);
             setResult(2, data);
             finish();
         }
+
+        else{
+            Toast t=Toast.makeText(this, "El remitente no es válido", Toast.LENGTH_SHORT);
+            t.show();
+        }
     }
 
-    private boolean valid(){
-        //TODO validar esto
-        return true;
-    }
 }

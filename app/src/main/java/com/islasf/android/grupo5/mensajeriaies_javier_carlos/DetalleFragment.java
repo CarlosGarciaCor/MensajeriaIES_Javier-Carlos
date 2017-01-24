@@ -64,27 +64,6 @@ public class DetalleFragment extends Fragment {
         RadioButton rbDesea = (RadioButton) getView().findViewById(R.id.rbtnDesea);
         RadioButton rbVolvera = (RadioButton) getView().findViewById(R.id.rbtnVolvera);
 
-        RadioGroup g1 = (RadioGroup) getView().findViewById(R.id.rgOpciones1);
-        g1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.rbtnDesea: ((RadioButton)group.findViewById(R.id.rbtnVolvera)).setChecked(false);; break;
-                    case R.id.rbtnVolvera: ((RadioButton)group.findViewById(R.id.rbtnDesea)).setChecked(false);; break;
-                }
-            }
-        });
-
-        RadioGroup g2 = (RadioGroup) getView().findViewById(R.id.rgOpciones2);
-            g2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.rbInfo: ((RadioButton)group.findViewById(R.id.rbUrgente)).setChecked(false);; break;
-                    case R.id.rbUrgente: ((RadioButton)group.findViewById(R.id.rbInfo)).setChecked(false);; break;
-                }
-            }
-        });
     }
 
     public void setListeners(DetalleListeners listeners){
