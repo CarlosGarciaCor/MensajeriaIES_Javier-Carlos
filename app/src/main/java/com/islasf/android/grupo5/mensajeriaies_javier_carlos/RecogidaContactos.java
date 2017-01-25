@@ -14,38 +14,48 @@ import java.util.ArrayList;
  */
 public class RecogidaContactos extends AsyncTask<ContentResolver, Integer, ArrayList<Contacto>>{
 
+
+    private CallbackAsynctask callbackAsynctask;
+    private ProgressBar pb;
+    int maximo = 1000;
+
+    public RecogidaContactos(CallbackAsynctask callbackAsynctask, ProgressBar pb) {
+        this.pb = pb;
+        this.callbackAsynctask = callbackAsynctask;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        pb.setVisibility(View.VISIBLE);
+        pb.setMax(maximo);
+    }
+
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
 
-        //TODO Actualizar progreso
+        pb.incrementProgressBy(values[0]);
     }
 
     @Override
     protected void onPostExecute(ArrayList<Contacto> contactos) {
         super.onPostExecute(contactos);
-
-        //TODO Hacer la progress invisible
+        pb.setVisibility(View.GONE);
+        callbackAsynctask.arrayListCargado(contactos);
     }
 
     @Override
     protected ArrayList<Contacto> doInBackground(ContentResolver... params) {
-        /*
-            TODO: Recoger contactos.
-            La idea es:
-                1. Con un primer cursor recorro todos los contactos. Recojo su ID y su nombre.
-                2. A su vez, dentro de este cursor corren paralelamente otros dos cursores, se encargan del mail y el teléfono.
-                3. Estos dos últimos cursores van recogiendo la selección comparando por cursor. Es decir, en el cursor hay que poner como condición que _ID = _ID.
-         */
-
         ArrayList<Contacto> listaContactos = new ArrayList<>();
         ContentResolver cr = params[0];
 
         Cursor curContact = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
 
-        //TODO Dividir contactos entre lo que tenga la barra de max para ver el incremento
-        while (curContact.moveToNext()){
 
+        while (curContact.moveToNext()){
+            int incremento = maximo / curContact.getCount(); //Forzamos la carga de datos.
             String nombre = "";
             String telefono = "";
             String email = "";
@@ -57,6 +67,7 @@ public class RecogidaContactos extends AsyncTask<ContentResolver, Integer, Array
             Cursor curEmail = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + idContacto, null, null);
 
             while (curEmail.moveToNext()){
+                curEmail.getCount();
                 email = curEmail.getString(curEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
             }
 
@@ -65,11 +76,13 @@ public class RecogidaContactos extends AsyncTask<ContentResolver, Integer, Array
             Contacto c1 = new Contacto(nombre, null, email, telefono);
             listaContactos.add(c1);
 
-            //TODO Llamar a publishprogress y subir el incremento.
+            publishProgress(incremento);
+
         }
 
         curContact.close();
 
         return listaContactos;
     }
+
 }

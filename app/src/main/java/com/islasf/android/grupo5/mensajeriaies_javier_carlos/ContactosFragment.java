@@ -19,11 +19,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ContactosFragment extends Fragment {
+public class ContactosFragment extends Fragment implements CallbackAsynctask{
 
     private ListView listadoContactos;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private ContactosListeners listeners;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +40,8 @@ public class ContactosFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        progressBar = (ProgressBar) getView().findViewById(R.id.progressBar);
 
         listadoContactos = (ListView) getView().findViewById(R.id.lvContactos);
         listadoContactos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,11 +74,14 @@ public class ContactosFragment extends Fragment {
     }
 
     private void verContactos(){
-        RecogidaContactos recogida = new RecogidaContactos();
-        ArrayList<Contacto> ole = recogida.doInBackground(getContext().getContentResolver());
-
-        AdaptadorContactos adaptador = new AdaptadorContactos(getContext(), ole);
-        listadoContactos.setAdapter(adaptador);
+        RecogidaContactos recogida = new RecogidaContactos(this, progressBar);
+        recogida.execute(getContext().getContentResolver());
     }
 
+
+    @Override
+    public void arrayListCargado(ArrayList<Contacto> contactos) {
+        AdaptadorContactos adaptador = new AdaptadorContactos(getContext(), contactos);
+        listadoContactos.setAdapter(adaptador);
+    }
 }
