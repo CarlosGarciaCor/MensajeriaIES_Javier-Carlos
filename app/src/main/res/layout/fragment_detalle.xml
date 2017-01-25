@@ -108,12 +108,16 @@
                             android:layout_height="wrap_content"
                             android:text="@string/urgente"
                             android:layout_weight="1"/>
-
                     </RadioGroup>
 
-
-
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/auto"/>
 
         <View
             android:layout_width="match_parent"
@@ -154,8 +158,8 @@
             <EditText
                 android:id="@+id/etMensaje"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:inputType="textMultiLine"
+                android:layout_height="wrap_content"
+                android:inputType="none"
                 android:ems="10"
                 android:labelFor="@+id/etMensaje"/>
 

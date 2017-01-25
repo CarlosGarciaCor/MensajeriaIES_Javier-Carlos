@@ -28,6 +28,7 @@
     <string name="volveraALlamar">Volverá a llamar</string>
     <string name="paraSuInfo">Para su información</string>
     <string name="urgente">¡URGENTE!</string>
+    <string name="auto">Automatizado</string>
 
     <string name="enviarSMS">Enviar SMS</string>
     <string name="enviarEmail">Enviar e-mail</string>

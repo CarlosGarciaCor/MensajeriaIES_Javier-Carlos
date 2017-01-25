@@ -34,20 +34,37 @@ public class Mensaje implements Serializable{
         this.volveraALlamar=illCall;
         this.deseaQueLeLlamen=callMe;
 
-        modelarAsunto();
+        modeladoAutomatico();
     }
 
 
-    public void modelarAsunto(){
+    public void modeladoAutomatico(){
 
+        //Modelado de asunto
         if (urgent) asunto="[URG]: ";
         else asunto="[Info]: ";
 
         if (remitente!=null) asunto=asunto+remitente.getNombre()+" ";
-        else asunto=asunto+"<Alguien> ";
+        else asunto=asunto+"<...> ";
 
-        if (deseaQueLeLlamen) asunto=asunto+"desea que le llame.";
-        else asunto=asunto+"volverá a llamar.";
+        asunto=asunto+"le ha dejado un mensaje";
+
+        //Modelado de mensaje
+        if (remitente!=null) cuerpoMensaje=remitente.getNombre()+" ";
+        else cuerpoMensaje="<...> ";
+
+        cuerpoMensaje=cuerpoMensaje+"le ha dejado un mensaje indicando que ";
+
+        if (volveraALlamar) cuerpoMensaje=cuerpoMensaje+"volverá a llamar. ";
+        else cuerpoMensaje=cuerpoMensaje+"desea que le llame. ";
+
+        if (remitente!=null && remitente.isValid()){
+            cuerpoMensaje=cuerpoMensaje+"Puede ponerse en contacto mediante:\n ";
+            if (!remitente.getTelefono().equals("")) cuerpoMensaje=cuerpoMensaje+"Tfno: "+remitente.getTelefono();
+            if (!remitente.getEmail().equals("")) cuerpoMensaje=cuerpoMensaje+"Mail: "+remitente.getEmail();
+        }
+
+        cuerpoMensaje=cuerpoMensaje+"\nEste mensaje ha sido generado automáticamente. Por favor no responda.";
     }
 
     //Validación previa al envío de SMS
