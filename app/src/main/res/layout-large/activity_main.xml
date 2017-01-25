@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+    <fragment class="com.islasf.android.grupo5.mensajeriaies_javier_carlos.MenuFragment"
+        android:id="@+id/FrgMenu"
+        android:layout_weight="30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_menu" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_margin="10dp"/>
+
+    <fragment class="com.islasf.android.grupo5.mensajeriaies_javier_carlos.DetalleFragment"
+        android:id="@+id/FrgDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="636dp"
+        android:layout_weight="70"
+        tools:layout="@layout/fragment_detalle" />
+
+</LinearLayout>
