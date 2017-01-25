@@ -4,13 +4,29 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 /**
  * TODO
  */
-public class RecogidaContactos extends AsyncTask<ContentResolver, Void, ArrayList<Contacto>>{
+public class RecogidaContactos extends AsyncTask<ContentResolver, Integer, ArrayList<Contacto>>{
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+
+        //TODO Actualizar progreso
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<Contacto> contactos) {
+        super.onPostExecute(contactos);
+
+        //TODO Hacer la progress invisible
+    }
 
     @Override
     protected ArrayList<Contacto> doInBackground(ContentResolver... params) {
@@ -27,7 +43,9 @@ public class RecogidaContactos extends AsyncTask<ContentResolver, Void, ArrayLis
 
         Cursor curContact = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
 
+        //TODO Dividir contactos entre lo que tenga la barra de max para ver el incremento
         while (curContact.moveToNext()){
+
             String nombre = "";
             String telefono = "";
             String email = "";
@@ -46,6 +64,8 @@ public class RecogidaContactos extends AsyncTask<ContentResolver, Void, ArrayLis
 
             Contacto c1 = new Contacto(nombre, null, email, telefono);
             listaContactos.add(c1);
+
+            //TODO Llamar a publishprogress y subir el incremento.
         }
 
         curContact.close();
