@@ -151,7 +151,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         if (mensaje.validarMensajeSMS()){
 
             String SENT="SMS_SENT";
-            String text=mensaje.getAsunto() +" "+ mensaje.getCuerpoMensaje(); //Mensaje formado para SMS (sin asunto)
+            String text=mensaje.modelarSMS(); //Mensaje formado para SMS (sin asunto)
 
             PendingIntent enviadoPI = PendingIntent.getBroadcast(this, 0, new Intent(
                     SENT), 0);
@@ -178,7 +178,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         }
 
         else
-            Toast.makeText(this, "No pudo enviar el SMS porque faltan campos por rellenar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No pudo enviar el SMS (revise los campos)", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -196,7 +196,7 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
             guardarEnBBDD();
         }
         else{
-            Toast.makeText(this, "No pudo enviar el correo porque faltan campos por rellenar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No pudo enviar el correo (revise los campos)", Toast.LENGTH_SHORT).show();
         }
     }
 
