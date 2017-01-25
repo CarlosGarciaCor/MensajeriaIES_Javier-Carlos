@@ -8,15 +8,27 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * Actividad
+ * Actividad en la cual el usuario va a poder introducir los datos de un remitente
+ * para poder pasarselo a DetalleActivity e ir formando el mensaje
  */
 public class RemitenteActivity extends AppCompatActivity implements RemitenteListeners {
 
+    /** Campo de texto del teléfono*/
     private EditText etTelefono;
+    /** Campo de texto del email*/
     private EditText etEmail;
+    /** Campo de texto del nombre de contacto*/
     private EditText etPersona;
+    /** Campo de texto de la empresa del contacto*/
     private EditText etEmpresa;
 
+    /**
+     * En el onCreate iniciamos todos los campos de texto y en caso de tener
+     * un objeto Contacto ya guardado en el bundle les asignamos los datos
+     * de este contacto. Esto pasará cuando hayamos elegido un contacto previamente
+     * y volvamos a esta actividad para editarlo.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +52,13 @@ public class RemitenteActivity extends AppCompatActivity implements RemitenteLis
         }
     }
 
+    /**
+     * Este método se va a ejecutar cuando se pulse el botón Aceptar del fragment. En el se va a
+     * montar el contacto con la información de los campos de texto, después se va a
+     * validar el contacto (usando la clase Contacto, lanzando un Toast si no es válido) y por
+     * último vamos a guardar dicho contacto en un Intent para poder abrirlo desde
+     * la activity que ha lanzado a esta.
+     */
     @Override
     public void onAceptar() {
         Contacto contacto = new Contacto(etPersona.getText().toString(),

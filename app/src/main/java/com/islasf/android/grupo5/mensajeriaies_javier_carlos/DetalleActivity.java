@@ -20,18 +20,33 @@ import android.widget.Toast;
 
 public class DetalleActivity extends AppCompatActivity implements DetalleListeners {
 
+    /** Objeto Mensaje que va a ser el que, según el usuario vaya introduciendo
+     * datos y cambiando campos, va a evolucionar hasta formar un Mensaje válido para
+     * ser enviado.*/
     private Mensaje mensaje;
-
+    /** Radio Button para decir que el mensaje es urgente*/
     private RadioButton rbUrgente;
+    /** Radio Button para decir que el mensaje es solo información*/
     private RadioButton rbInfo;
+    /** Radio Button para indicar que el remitente volverá a llamar*/
     private RadioButton rbtnVolvera;
+    /** /** Radio Button para indicar que el remitente desea que le llamen*/
     private RadioButton rbtnDesea;
+    /** Campo de texto del asunto*/
     private EditText etAsunto;
+    /** Campo de texto del cuepro del mensaje*/
     private EditText etMensaje;
+    /** Botón para seleccionar destinatario*/
     private Button btnDestinatario;
+    /** Botón para seleccionar remitente*/
     private Button btnRemitente;
+    /** CheckBox para seleccionar la opción de automatizado.*/
     private CheckBox cbAuto;
 
+    /**
+     * En el onCreate inicializamos el Mensaje y todos los componentes con los que el usuario interactua.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +60,15 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         inicializarComponentes();
     }
 
+    /**
+     * Este método se llama desde el onCreate e inicializa todos los componentes.
+     * Aquí están programados los listeners para los RadioButtons y el CheckBox.
+     * Lo que se hace en los Radio Buttons básicamente es desactivar el botón contrario
+     * y formar el auto-mensaje en consecuencia (si está habilitado).
+     *
+     * En el listener del CheckBox limpiamos los campos de texto al desactivar
+     * el automatizar.
+     */
     private void inicializarComponentes(){
         //Initializamos las Views de las que se saca la info del mensaje
         rbInfo = (RadioButton) findViewById(R.id.rbInfo);
@@ -129,12 +153,21 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         etMensaje.setText(mensaje.getCuerpoMensaje());
     }
 
+    /**
+     * Al pulsar el botón Seleccionar Destinatario hacemos un Intent a la actividad de los contactos,
+     * donde seleccionaremos el destinatario.
+     */
     @Override
     public void onSeleccionarDestinatario() {
         Intent i=new Intent(this, ContactosActivity.class);
         startActivityForResult(i, 0);
     }
 
+    /**
+     * Al pulsar en Seleccionar Remitente lanzamos un Intent a la actividad de datos del remitente.
+     * Si el remitente que tenemos en el contacto existe, lo metemos en el Intent
+     * para que la otra actividad se cree con los datos ya elegidos.
+     */
     @Override
     public void onSeleccionarRemitente() {
         Intent i=new Intent(this, RemitenteActivity.class);
@@ -144,6 +177,17 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         startActivityForResult(i, 1);
     }
 
+    /**
+     * Este método se ejecuta al pulsar en EnviarSMS.
+     *
+     * Lo primero que hacemos aquí es validar el mensaje. Si no es válido lanzamos un Toast informado de ello.
+     * Si sí es válido vamos a mandarlo. Para ello usamos la clase SMSManager.
+     * Como queremos también saber si el mensaje se ha enviado o no, vamos a registrar
+     * un broadcast receiver que va a escuchar si se ha enviado dicho mensaje. Este receiver estará relacionado
+     * con el PendingIntent que le hemos pasado como parámetro al enviar el mensaje con sms.sendTextMessage(...)
+     *
+     * Es necesario incluir la línea de permisos correspondiente en el AndroidManifest.xml
+     */
     @Override
     public void onEnviarSMS() {
         setCampos();
@@ -182,6 +226,15 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
 
     }
 
+    /**
+     * Al enviar un email lo primero se valida que el mensaje sea válido, informando al usuario si no lo es con un Toast.
+     * Una vez validado, la forma de mandar el email va a ser mediante un Intent implícito, es decir, vamos a lanzar un
+     * Intent con una acción definida y podremos abrir con él toda aplicacción del móvil que tenga registrada esa acción.
+     *
+     * El problema que tenemos aquí es que al ser un Intent explícito nosotros dependemos de la aplicación que se
+     * lance para saber si el usuario ha enviado o no el mensaje. Lamentablemente, la aplicación de GMail de Google (la usada
+     * para las pruebas) no contempla esta situación y siempre devuelve el mismo código de resultado, se mande el mail o no.
+     */
     @Override
     public void onEnviarEmail() {
         setCampos();
@@ -200,6 +253,10 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         }
     }
 
+    /**
+     * Método privado para formar los campos de texto y los booleanos
+     * del mensaje en función de lo que valgan los componentes.
+     */
     private void setCampos(){
         if (rbtnDesea.isChecked())
             mensaje.deseaQueLoLlamen();
@@ -210,6 +267,11 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         mensaje.setCuerpoMensaje(etMensaje.getText().toString());
     }
 
+    /**
+     * Método para guardar un mensaje en la base de datos. Una vez lanzado el mensaje, se llamará
+     * a este método donde se hará el insert en nuestra base de datos usando las clases
+     * MensajesSQLLiteHelper y SQLiteDatabase.
+     */
     private void guardarEnBBDD(){
         MensajesSQLiteHelper dbhelper = new MensajesSQLiteHelper(this, "Mensajeitor3000", null, 1);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
@@ -223,6 +285,19 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         }
     }
 
+    /**
+     * El onActivityResult se ejecuta al volver de otra actividad. Esto en esta clase
+     * sucede dos veces:
+     *
+     * 1. Al seleccionar el destinatario:
+     * Simplemente recogemos el contacto guardado en el Intent data y lo guardamos
+     * en el Mensaje.
+     *
+     * 2. Al seleccionar el remitente
+     * Lo mismo pero con el remitente, incluyendo además el modelado del mensaje
+     * si la opción de automatizado está activada.
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -249,6 +324,11 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         }
     }
 
+    /**
+     * Guardamos el estado al rotar la pantalla. Lo único que interesa guardar es el objeto
+     * Mensaje, que implementa Serializable para esta ocasión
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -257,6 +337,11 @@ public class DetalleActivity extends AppCompatActivity implements DetalleListene
         outState.putSerializable("Mensaje", mensaje);
     }
 
+    /**
+     * Al rehacer la pantalla al rotar, tenemos que volver a construir todos los campos
+     * en función de los valores de los atributos del Mensaje. Es lo que se hace en este método.
+     * @param savedInstanceState
+     */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
