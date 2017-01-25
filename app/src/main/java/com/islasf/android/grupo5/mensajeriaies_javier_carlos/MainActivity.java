@@ -45,10 +45,11 @@ public class MainActivity extends AppCompatActivity implements MenuListeners {
 
     /**
      * Al pulsar el botón Acerca De ocurre esto. Lanza un Intent para
-     * la actividad AboutActivity
+     * la actividad AcercaDe
      */
     @Override
     public void onAcerdaDe() {
-        //TODO: intent a la actividad del fragment de lo que pollas sea esto
+        Intent i = new Intent(this, AcercaDe.class);
+        startActivity(i);
     }
 }

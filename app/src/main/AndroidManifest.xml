@@ -21,7 +21,10 @@
         <activity android:name=".DetalleActivity" />
         <activity android:name=".ContactosActivity" />
         <activity android:name=".RemitenteActivity" />
-        <activity android:name=".HistorialActivity"/>
+        <activity android:name=".HistorialActivity" />
+        <activity
+            android:name=".AcercaDe"
+            android:label="@string/title_activity_acerca_de"></activity>
     </application>
 
 </manifest>
