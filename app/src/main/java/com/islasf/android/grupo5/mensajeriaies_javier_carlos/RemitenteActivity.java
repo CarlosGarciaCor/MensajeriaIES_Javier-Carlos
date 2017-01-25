@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Actividad
+ */
 public class RemitenteActivity extends AppCompatActivity implements RemitenteListeners {
 
     private EditText etTelefono;

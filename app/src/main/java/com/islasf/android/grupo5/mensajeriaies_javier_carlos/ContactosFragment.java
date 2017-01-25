@@ -19,13 +19,27 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Fragment asociado a la pantalla del listado de contactos. Estos se van a extraer
+ * de la base de datos de contactos del móvil.
+ */
 public class ContactosFragment extends Fragment implements CallbackAsynctask{
 
+    /**
+     * Vista del listado de contactos
+     */
     private ListView listadoContactos;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    /**
+     * Objeto de la interfaz que va a permitir el callback entre Fragment y Activity
+     */
     private ContactosListeners listeners;
     private ProgressBar progressBar;
 
+    /**
+     * Método onCreateView que se va a ejecutar cuando la activity cree el Fragment.
+     * Éste método busca el layout asociado a este fragment y lo infla.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +47,10 @@ public class ContactosFragment extends Fragment implements CallbackAsynctask{
         return inflater.inflate(R.layout.fragment_contactos, container, false);
     }
 
+    /**
+     * Setter para el objeto que proporciona los métodos de callback con la Activity
+     * @param listeners Objeto que implementa rutinas callback
+     */
     public void setListeners(ContactosListeners listeners){
         this.listeners=listeners;
     }

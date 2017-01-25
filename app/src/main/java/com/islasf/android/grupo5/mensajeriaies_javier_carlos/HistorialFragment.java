@@ -13,10 +13,26 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragmento dedicado a mostrar una lista con el historial de mensajes que han sido enviados.
+ * Como es una pantalla sin ninguna funcionalidad para el usuario, no es necesario que implementemos
+ * rutinas callback para los listeners de los componentes.
+ *
+ * Implementa CallbackAsynctask para que la propia clase pueda realizar la tarea
+ * de conectarse a la base de datos para sacar el historial de mensajes.
+ */
 public class HistorialFragment extends Fragment implements CallbackAsynctaskM{
 
+    /**
+     * Vista del listado de mensajes
+     */
     private ListView listadoMensajes;
 
+
+    /**
+     * Método onCreateView que se va a ejecutar cuando la activity cree el Fragment.
+     * Éste método busca el layout asociado a este fragment y lo infla.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,6 +40,11 @@ public class HistorialFragment extends Fragment implements CallbackAsynctaskM{
         return inflater.inflate(R.layout.fragment_historial, container, false);
     }
 
+    /**
+     * Método similar al onCreate de las activities. En él programamos el acceso a la base
+     * de datos para sacar el historial de mensajes. Esto se hace lanzando una tarea asíncrona.
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

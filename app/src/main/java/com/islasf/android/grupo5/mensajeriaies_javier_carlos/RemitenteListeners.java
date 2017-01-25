@@ -1,11 +1,15 @@
 package com.islasf.android.grupo5.mensajeriaies_javier_carlos;
 
 /**
- * Created by sanch on 24/01/2017.
+ * Interfaz para implementar el callback de RemitenteFragment en RemitenteActivity
+ * @author Carlos García y Javier Sánchez
  */
 
 public interface RemitenteListeners {
 
+    /**
+     * Método a implementar en el cual se desarrollará lo que pasa al pulsar el botón aceptar.
+     */
     public void onAceptar();
 
 }

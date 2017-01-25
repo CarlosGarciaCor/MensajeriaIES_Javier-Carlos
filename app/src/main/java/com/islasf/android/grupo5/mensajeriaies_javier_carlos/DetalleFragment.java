@@ -10,10 +10,22 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+/**
+ * Este Fragment es el fragment asociado a la pantalla más importante del programa, la del envío de mensajes.
+ * Aquí se redireccionarán los listenres de los componentes de dicha pantalla para ser programados
+ * en DetalleActivity.
+ */
 public class DetalleFragment extends Fragment {
 
+    /**
+     * Objeto de la interfaz que va a permitir el callback entre Fragment y Activity
+     */
     private DetalleListeners listeners;
 
+    /**
+     * Método onCreateView que se va a ejecutar cuando la activity cree el Fragment.
+     * Éste método busca el layout asociado a este fragment y lo infla.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -21,6 +33,12 @@ public class DetalleFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_detalle, container, false);
     }
 
+    /**
+     * Método similar al onCreate en las activities. En él programamos los listeners de todos
+     * los componentes con los que el usuario va a interaccionar en esta pantalla. Dentro de cada listener
+     * hacemos una llamada al método correspondiente de las rutinas callback.
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -30,7 +48,7 @@ public class DetalleFragment extends Fragment {
         btnDestinatario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                destinatarioListener();
+                listeners.onSeleccionarDestinatario();
             }
         });
 
@@ -38,7 +56,7 @@ public class DetalleFragment extends Fragment {
         btnRemitente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remitenteListener();
+                listeners.onSeleccionarRemitente();
             }
         });
 
@@ -46,7 +64,7 @@ public class DetalleFragment extends Fragment {
         btnEnviarSMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarSMS();
+                listeners.onEnviarSMS();
             }
         });
 
@@ -54,7 +72,7 @@ public class DetalleFragment extends Fragment {
         btnEnviarEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarEmail();
+                listeners.onEnviarEmail();
             }
         });
 
@@ -66,23 +84,12 @@ public class DetalleFragment extends Fragment {
 
     }
 
+    /**
+     * Setter para el objeto que proporciona los métodos de callback con la Activity
+     * @param listeners Objeto que implementa rutinas callback
+     */
     public void setListeners(DetalleListeners listeners){
         this.listeners=listeners;
     }
 
-    public void destinatarioListener(){
-        listeners.onSeleccionarDestinatario();
-    }
-
-    public void remitenteListener(){
-        listeners.onSeleccionarRemitente();
-    }
-
-    public void enviarSMS(){
-        listeners.onEnviarSMS();
-    }
-
-    public void enviarEmail(){
-        listeners.onEnviarEmail();
-    }
 }
