@@ -11,38 +11,56 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by CarlosG on 24/01/2017.
+ * Clase AdaptadorMensajes.<br/>
+ * La clase extiende de {@link ArrayAdapter ArrayAdapter}, es una clase creada para crear el modelo de
+ * datos de la listview que nos muestra los mensajes, recogidos previamente de la base de datos.
+ *
+ * @author Carlos García Corpas y Javier Sánchez Gómez
  */
-
-public class AdaptadorMensajes extends ArrayAdapter<Mensaje>{
+public class AdaptadorMensajes extends ArrayAdapter<Mensaje> {
 
     private ArrayList<Mensaje> listado;
 
+    /**
+     * Constructor por defecto de la clase. Se encarga de especificar el layout de cada elemento del listview a través del método super.
+     * Además, recoge el ArrayList de Mensajes de donde vamos a sacar los datos.
+     *
+     * @param context El contexto de la aplicación.
+     * @param objects La colección de mensajes que vamos a meter en el listview.
+     */
     public AdaptadorMensajes(Context context, ArrayList<Mensaje> objects) {
         super(context, R.layout.listado_mensajes, objects);
         this.listado = objects;
     }
 
+    /**
+     * Este método se sobrescribe de la clase ArrayAdapter. Es el método encargado de inflar los layouts de cada uno de los mensajes que van a introducirse en el listview.
+     * Ha sido optimizado utilizando las técnicas de usar la vista reciclada (el convertView) y un {@link MensajesHolder Holder}.
+     *
+     * @param position    La posición del mensaje.
+     * @param convertView La vista reciclada. En caso de que no exista aún porque no se ha hecho scroll su valor es null.
+     * @param parent      La vista padre.
+     * @return La vista del mensaje ya formada.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = convertView;
         MensajesHolder holder;
 
-        if (item == null){
+        if (item == null) {
             LayoutInflater inflador = LayoutInflater.from(getContext());
             item = inflador.inflate(R.layout.listado_mensajes, null);
 
             holder = new MensajesHolder();
-            holder.cuerpo = (TextView)item.findViewById(R.id.tvCuerpo);
-            holder.hora = (TextView)item.findViewById(R.id.tvHora);
-            holder.destinatario = (TextView)item.findViewById(R.id.tvDestinatarioH);
-            holder.remitente = (TextView)item.findViewById(R.id.tvRemitenteH);
-            holder.asunto = (TextView)item.findViewById(R.id.tvAsuntoH);
+            holder.cuerpo = (TextView) item.findViewById(R.id.tvCuerpo);
+            holder.hora = (TextView) item.findViewById(R.id.tvHora);
+            holder.destinatario = (TextView) item.findViewById(R.id.tvDestinatarioH);
+            holder.remitente = (TextView) item.findViewById(R.id.tvRemitenteH);
+            holder.asunto = (TextView) item.findViewById(R.id.tvAsuntoH);
             item.setTag(holder);
-        }
-        else{
-            holder = (MensajesHolder)item.getTag();
+        } else {
+            holder = (MensajesHolder) item.getTag();
         }
 
         holder.destinatario.setText(listado.get(position).getDestinatario().getNombre());
