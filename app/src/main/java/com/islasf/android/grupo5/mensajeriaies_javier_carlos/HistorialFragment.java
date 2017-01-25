@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistorialFragment extends Fragment {
+public class HistorialFragment extends Fragment implements CallbackAsynctaskM{
 
     private ListView listadoMensajes;
 
@@ -30,11 +30,23 @@ public class HistorialFragment extends Fragment {
 
         listadoMensajes = (ListView) getView().findViewById(R.id.lvHistorial);
 
-        RecogidaMensajes recogida = new RecogidaMensajes();
+        RecogidaMensajes recogida = new RecogidaMensajes(this);
         MensajesSQLiteHelper helper = new MensajesSQLiteHelper(getContext(), "Mensajeitor3000", null, 1);
+        recogida.execute(helper.getReadableDatabase());
 
-        ArrayList<Mensaje> mensajes=recogida.doInBackground(helper.getReadableDatabase());
+    }
 
+    /**
+     * Método que se implementará en la clase {@link HistorialFragment HistorialFragment}. En esa clase
+     * se recogerá el ArrayList de Mensajes y se pasará al adaptador.
+     * <p>
+     * Por otro lado, a este método le llama la clase {@link RecogidaMensajes RecogidaMensajes} para pasarle
+     * el ArrayList cuando su método doInBackground termine.
+     *
+     * @param mensajes la colección de mensajes
+     */
+    @Override
+    public void arrayListCargado(ArrayList<Mensaje> mensajes) {
         if (mensajes==null){
             Toast.makeText(getContext(), "No se pudo conectar con la base de datos, inténtelo de nuevo", Toast.LENGTH_SHORT).show();
         }
