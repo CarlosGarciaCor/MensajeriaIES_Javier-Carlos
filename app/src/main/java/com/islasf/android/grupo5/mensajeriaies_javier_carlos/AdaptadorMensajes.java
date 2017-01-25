@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class AdaptadorMensajes extends ArrayAdapter<Mensaje> {
 
+    /**El listado de mensajes con los que se va a tratar.*/
     private ArrayList<Mensaje> listado;
 
     /**
