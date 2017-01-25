@@ -9,7 +9,10 @@ import android.widget.TextView;
  * de cada uno de los textView.
  */
 public class ContactosHolder {
+    /**Campo donde se almacena el TextView correspondiente al nombre del contacto.*/
     TextView nombre;
+    /**Campo donde se almacena el TextView correspondiente al número del contacto.*/
     TextView numero;
+    /**Campo donde se almacena el TextView correspondiente al email del contacto.*/
     TextView email;
 }

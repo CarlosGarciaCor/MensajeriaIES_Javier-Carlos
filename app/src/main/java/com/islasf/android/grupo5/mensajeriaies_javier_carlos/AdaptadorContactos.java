@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class AdaptadorContactos extends ArrayAdapter<Contacto> {
 
+    /**El ArrayList de contactos a tratar.*/
     private ArrayList<Contacto> contactos;
 
     /**
